@@ -37,3 +37,10 @@ def hand_check(combination):
     for num in values:
         if values.count(num) == 4:
             return "Four of a kind"
+
+    # THREE OF A KIND
+    tmp = cards
+    values = list(tmp.values())
+    for num in values:
+        if values.count(num) == 3:
+            return "Three of a kind"
