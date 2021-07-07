@@ -30,3 +30,10 @@ def hand_check(combination):
 
     # STRAIGHT FLUSH
     tmp = cards
+
+    # FOUR OF A KIND
+    tmp = cards
+    values = list(tmp.values())
+    for num in values:
+        if values.count(num) == 4:
+            return "Four of a kind"
