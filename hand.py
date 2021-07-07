@@ -64,6 +64,18 @@ def hand_check(combination):
             return "Flush"
 
     # STRAIGHT
+    tmp = cards
+    values = sorted(list(tmp.values()))
+    count = 1
+    for i in range(len(values)-1):
+        if values[i+1] == values[i]:
+            continue
+        elif values[i+1] == values[i] + 1:
+            count += 1
+        else:
+            count = 1
+    if count >= 5:
+        return "Straight"
 
     # THREE OF A KIND
     tmp = cards
@@ -73,7 +85,24 @@ def hand_check(combination):
             return "Three of a kind"
 
     # TWO PAIR
+    tmp = cards
+    values = list(tmp.values())
+    pairs = []
+    for num in values:
+        if values.count(num) == 2:
+            pairs.append(num)
+            break
+    if len(pairs) != 0:
+        for num in values:
+            if values.count(num) == 2 and num != pairs[0]:
+                return "Two pair"
 
     # PAIR
+    tmp = cards
+    values = list(tmp.values())
+    for num in values:
+        if values.count(num) == 2:
+            return "Pair"
 
     # HIGH CARD
+    return "High card"
