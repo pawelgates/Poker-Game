@@ -38,9 +38,42 @@ def hand_check(combination):
         if values.count(num) == 4:
             return "Four of a kind"
 
+    # FULL HOUSE
+    tmp = cards
+    values = list(tmp.values())
+    nums = []
+    for num in values:
+        if values.count(num) == 3:
+            nums.append(num)
+            break
+    if len(nums) != 0:
+        for num in values:
+            if values.count(num) >= 2 and num != nums[0]:
+                return "Full house"
+
+    # FLUSH
+    tmp = cards
+    dirty_keys = list(tmp.keys())
+    clear_keys = []
+    for key in dirty_keys:
+        key = key.split()
+        new_key = key[1]
+        clear_keys.append(new_key)
+    for shape in clear_keys:
+        if clear_keys.count(shape) >= 5:
+            return "Flush"
+
+    # STRAIGHT
+
     # THREE OF A KIND
     tmp = cards
     values = list(tmp.values())
     for num in values:
         if values.count(num) == 3:
             return "Three of a kind"
+
+    # TWO PAIR
+
+    # PAIR
+
+    # HIGH CARD

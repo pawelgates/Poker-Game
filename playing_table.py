@@ -20,7 +20,6 @@ player2.show_cards()
 
 # FLOP
 table.flop = dealer.flop_cards()
-print(type(table.flop[0]))
 table.display_cards()
 
 # TURN
@@ -32,5 +31,11 @@ table.river = dealer.river_card()
 table.display_cards()
 
 # WINNER
+# TEST
+test_fullhouse = [("10 clubs", 10), ("K diamonds", 13),
+                  ("Q clubs", 12), ("K clubs", 13), ("A diamonds", 14), ("A hearts", 14), ("A clubs", 14)]
+test_flush = [("10 clubs", 10), ("K diamonds", 13),
+              ("Q clubs", 12), ("K clubs", 13), ("A clubs", 14), ("6 clubs", 6), ("8 clubs", 8)]
 
-hand_check(cards_combination(player2, table))
+print(hand_check(test_flush))
+print(hand_check(cards_combination(player2, table)))

@@ -1,6 +1,4 @@
 
-from hand import hand_check
-
 
 def cards_deck():
     deck = {
