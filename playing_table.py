@@ -1,6 +1,6 @@
 from models import Player, Dealer, Table
 from cards import cards_deck
-from winner import cards_combination
+from hand import cards_combination, hand_check
 
 
 player1 = Player("Pavel", 2000)
@@ -32,4 +32,5 @@ table.river = dealer.river_card()
 table.display_cards()
 
 # WINNER
-cards_combination(player2, table)
+
+hand_check(cards_combination(player2, table))
