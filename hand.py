@@ -30,6 +30,33 @@ def hand_check(combination):
 
     # STRAIGHT FLUSH
     tmp = cards
+    dirty_keys = list(tmp.keys())
+    clear_keys = []
+    flush_shape = ""
+    for key in dirty_keys:
+        key = key.split()
+        new_key = key[1]
+        clear_keys.append(new_key)
+    for shape in clear_keys:
+        if clear_keys.count(shape) >= 5:
+            flush_shape = shape
+    if flush_shape is not "":
+        list_of_flush_cards = []
+        dirty_keys = list(tmp.keys())
+        for key in dirty_keys:
+            if flush_shape in key:
+                list_of_flush_cards.append(tmp[key])
+        values = sorted(list_of_flush_cards)
+        count = 1
+        for i in range(len(values)-1):
+            if values[i+1] == values[i]:
+                continue
+            elif values[i+1] == values[i] + 1:
+                count += 1
+                if count >= 5:
+                    return "Straight flush"
+            else:
+                count = 1
 
     # FOUR OF A KIND
     tmp = cards
@@ -72,10 +99,10 @@ def hand_check(combination):
             continue
         elif values[i+1] == values[i] + 1:
             count += 1
+            if count >= 5:
+                return "Straight"
         else:
             count = 1
-    if count >= 5:
-        return "Straight"
 
     # THREE OF A KIND
     tmp = cards
