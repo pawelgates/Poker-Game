@@ -2,6 +2,8 @@ import random
 
 
 class Player:
+    """ Player class """
+
     def __init__(self, name, chips):
         self.name = name
         self.chips = chips
@@ -22,6 +24,8 @@ class Player:
 
 
 class Dealer:
+    """ Dealer class """
+
     def __init__(self, name):
         self.name = name
 
@@ -67,6 +71,8 @@ class Dealer:
 
 
 class Table:
+    """ Playing table class """
+
     def __init__(self):
         self.flop = None
         self.turn = None
@@ -74,11 +80,11 @@ class Table:
 
     def display_cards(self):
         cards = ""
-        if self.flop != None:
+        if self.flop is not None:
             cards += f"{self.flop[0][0]}  {self.flop[1][0]}  {self.flop[2][0]}  "
-        if self.turn != None:
+        if self.turn is not None:
             cards += f"{self.turn[0]}  "
-        if self.river != None:
+        if self.river is not None:
             cards += f"{self.river[0]}"
         return print(cards)
 
