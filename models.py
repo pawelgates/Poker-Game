@@ -51,6 +51,12 @@ class Player:
             self.table_chips += call
             return("CALL", call)
 
+        def all_in():
+            all_in = self.chips
+            self.chips = 0
+            self.table_chips += all_in
+            return("ALL IN", all_in)
+
 
 class Dealer:
     """ Dealer class """
