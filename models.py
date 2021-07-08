@@ -7,6 +7,8 @@ class Player:
     def __init__(self, name, chips):
         self.name = name
         self.chips = chips
+        self.table_chips = 0
+        self.blinds = 0     # 0 = None, 1 = Small, 2 = Big
 
     def get_cards(self, cards):
         self.card_a = cards[0]
@@ -15,12 +17,39 @@ class Player:
     def show_cards(self):
         print(f"Player: {self.name}, Cards: {self.card_a[0]} {self.card_b[0]}")
 
-    def blinds_status(self, status):
-        self.blinds = status
-
     def player_cards(self):
         player_cards = [self.card_a, self.card_b]
         return player_cards
+
+    def actions(self):
+        def set_blinds(table):
+            if self.blinds == 1:
+                self.chips -= table.small_blinds
+                self.table_chips += table.small_blinds
+                return ("SMALL", table.small_blinds)
+            elif self.blinds == 2:
+                self.chips -= table.small_blinds*2
+                self.table_chips += table.small_blinds*2
+                return ("BIG", table.small_blinds*2)
+            else:
+                return ("NONE", 0)
+
+        def check():
+            return ("CHECK", 0)
+
+        def fold():
+            return ("FOLD", 0)
+
+        def bet(ammount):
+            self.chips -= ammount
+            self.table_chips += ammount
+            return ("BET", ammount)
+
+        def call(bet):
+            call = bet - self.table_chips
+            self.chips -= call
+            self.table_chips += call
+            return("CALL", call)
 
 
 class Dealer:
@@ -28,6 +57,7 @@ class Dealer:
 
     def __init__(self, name):
         self.name = name
+        self.hands = 0
 
     def greeting(self):
         print(
@@ -69,6 +99,9 @@ class Dealer:
         self.deck.pop(river_card[0])
         return river_card
 
+    def count_hands(self):
+        self.hands += 1
+
 
 class Table:
     """ Playing table class """
@@ -77,6 +110,8 @@ class Table:
         self.flop = None
         self.turn = None
         self.river = None
+        self.chips = None
+        self.small_blinds = 0
 
     def display_cards(self):
         cards = ""
@@ -95,5 +130,12 @@ class Table:
         table_cards.append(self.flop[2])
         table_cards.append(self.turn)
         table_cards.append(self.river)
-
         return table_cards
+
+    def blinds_span(self, list_of_players):
+        last = list_of_players.pop()
+        list_of_players.insert(0, last)
+        for player in list_of_players:
+            player.blinds = 0
+        list_of_players[0].blinds = 1
+        list_of_players[1].blinds = 2
