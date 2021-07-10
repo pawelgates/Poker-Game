@@ -5,18 +5,22 @@ from hand import cards_combination, hand_check
 
 player1 = Player("Pavel", 2000)
 player2 = Player("Moshe", 2000)
+player3 = Player("Sasha", 2000)
 
-players = [player1, player2]
+players = [player1, player2, player3]
 dealer = Dealer("John")
 table = Table()
+
+table.blinds_span(players)
+table.blinds_span(players)
+table.blinds_span(players)
 
 dealer.new_deck(cards_deck())
 
 for player in players:
     dealer.give_player(player)
+    player.show_cards()
 
-player1.show_cards()
-player2.show_cards()
 
 # FLOP
 table.flop = dealer.flop_cards()
@@ -41,5 +45,6 @@ test_straight = [("10 diamonds", 10), ("K diamonds", 13),
 test_straight_flush = [("8 diamonds", 8), ("K hearts", 13), ("Q diamonds", 12),
                        ("K clubs", 13), ("10 diamonds", 10), ("9 diamonds", 9), ("J diamonds", 11)]
 
-print(hand_check(test_straight_flush))
-print(hand_check(cards_combination(player2, table)))
+for player in players:
+    print(hand_check(cards_combination(player, table)))
+# print(hand_check(test_straight_flush))
