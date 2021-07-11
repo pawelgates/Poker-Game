@@ -117,7 +117,8 @@ class Table:
         self.turn = None
         self.river = None
         self.chips = None
-        self.small_blinds = 0
+        self.small_blinds = 10
+        self.table_chips = 0
 
     def display_cards(self):
         cards = ""
@@ -145,3 +146,5 @@ class Table:
             player.blinds = 0
         list_of_players[0].blinds = 1
         list_of_players[1].blinds = 2
+        for player in list_of_players:
+            print(f"Player: {player.name} Blinds: {player.blinds}.")
